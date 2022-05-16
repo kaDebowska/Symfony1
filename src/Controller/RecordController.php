@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Repository\RecordRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +18,10 @@ class RecordController extends AbstractController
     public function index(RecordRepository $repository): Response
     {
         $records = $repository->findAll();
+
         return $this->render(
             'record/index.html.twig',
             ['records' => $records]
-
         );
     }
 }

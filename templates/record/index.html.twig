@@ -1,6 +1,36 @@
-{{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
 Records list
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/record.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Records list</h1>
+    {% if records is defined and records|length %}
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Tags</th>
+            <th scope="col">Actions</th>
+        </tr>
+        {% for record in records %}
+            <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.title }}</td>
+                <td>{{ record.content }}</td>
+                <td>{{ record.tags|join(', ') }}</td>
+                <td>&nbsp;</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>List is empty!</p>
+    {% endif %}
+{% endblock %}
