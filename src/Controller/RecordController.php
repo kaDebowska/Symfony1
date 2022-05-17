@@ -24,6 +24,7 @@ class RecordController extends AbstractController
             ['records' => $records]
         );
     }
+
     #[Route(
         '/{id}',
         name: 'record_show',
@@ -32,7 +33,8 @@ class RecordController extends AbstractController
     )]
     public function show(RecordRepository $repository, int $id): Response
     {
-        $record = $repository ->findOneById($id);
+        $record = $repository->findOneById($id);
+
         return $this->render(
             'record/show.html.twig',
             ['record' => $record]

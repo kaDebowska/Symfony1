@@ -10,16 +10,17 @@
     </h1>
     {% if record is defined and record|length %}
         <dl>
-            <dt>Title</dt>
+            <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{ record.title }}</dd>
-            <dt>Content</dt>
+            <dt>{{ 'label.content'|trans }}</dt>
             <dd>{{ record.content }}</dd>
-            <dt>Tags</dt>
+            <dt>{{ 'label.tags'|trans }}<dt>
             <dd>{{ record.tags|join(', ') }}</dd>
         </dl>
+
     {% else %}
         <p>
-            Record not found.
+            {{ 'message.record_not_found'|trans }}
         </p>
     {% endif %}
     <p>
