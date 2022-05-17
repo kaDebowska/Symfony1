@@ -1,32 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Records list
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-<link rel="stylesheet" href="{{ asset('css/record.css') }}">
+    {{ 'title.record_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>Records list</h1>
+    <h1>{{ 'title.record_list'|trans }}</h1>
     {% if records is defined and records|length %}
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Tags</th>
-            <th scope="col">Actions</th>
-        </tr>
-        {% for record in records %}
-{#            {{ dump (record) }}#}
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ record.id }}</td>
-                <td>{{ record.title }}</td>
-                <td>{{ record.content }}</td>
-                <td>{{ record.tags|join(', ') }}</td>
+                <th>{{ 'label.id'|trans }}</th>
+                <th>{{ 'label.title'|trans }}</th>
+                <th>{{ 'label.content'|trans }}</th>
+                <th scope="col">
+                    {{ 'label.actions'|trans }}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record.id }}</td>
+                    <td>{{ record.title }}</td>
+                    <td>{{ record.tags|join(', ') }}</td>
                 <td>
                     <a href="{{ url('record_show', {'id': record.id}) }}" title="view record">
                         view record
@@ -36,6 +33,6 @@ Records list
         {% endfor %}
     </table>
     {% else %}
-        <p>List is empty!</p>
+        {{ 'message.empty_list'|trans }}
     {% endif %}
 {% endblock %}

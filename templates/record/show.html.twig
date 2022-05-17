@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    View record
+    {{ 'title.record_view'|trans({'%id%':record.id|default(' ')}) }}
 {% endblock %}
 
 {% block body %}
+    <h1>
+        {{ 'title.record_view'|trans({'%id%':record.id|default(' ')}) }}
+    </h1>
     {% if record is defined and record|length %}
         <dl>
             <dt>Title</dt>
