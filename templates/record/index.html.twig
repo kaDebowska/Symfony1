@@ -21,12 +21,17 @@ Records list
             <th scope="col">Actions</th>
         </tr>
         {% for record in records %}
+{#            {{ dump (record) }}#}
             <tr>
                 <td>{{ record.id }}</td>
                 <td>{{ record.title }}</td>
                 <td>{{ record.content }}</td>
                 <td>{{ record.tags|join(', ') }}</td>
-                <td>&nbsp;</td>
+                <td>
+                    <a href="{{ url('record_show', {'id': record.id}) }}" title="view record">
+                        view record
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
