@@ -6,6 +6,18 @@
         <source>label.actions</source>
         <target>Operacje</target>
       </trans-unit>
+      <trans-unit id="label.comment">
+        <source>label.comment</source>
+        <target>Komentarz</target>
+      </trans-unit>
+      <trans-unit id="label.created_at">
+        <source>label.created_at</source>
+        <target>Utworzono</target>
+      </trans-unit>
+      <trans-unit id="label.updated_at">
+        <source>label.updated_at</source>
+        <target>Zaktualizowano</target>
+      </trans-unit>
       <trans-unit id="label.id">
         <source>label.id</source>
         <target>Id</target>
@@ -37,6 +49,22 @@
       <trans-unit id="title.record_view">
         <source>title.record_view</source>
         <target>Widok rekordu #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.task_list">
+        <source>title.task_list</source>
+        <target>Lista zadań</target>
+      </trans-unit>
+      <trans-unit id="action.view">
+        <source>action.view</source>
+        <target>Widok zadania</target>
+      </trans-unit>
+      <trans-unit id="title.task_details">
+        <source>title.task_details</source>
+        <target>Szczegóły zadania #%id%</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_list">
+        <source>action.back_to_list</source>
+        <target>Powrót do listy</target>
       </trans-unit>
     </body>
   </file>

@@ -1,28 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Task view
+    {{ 'title.task_details'|trans({'%id%': task.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>Task view</h1>
+    <h1>{{ 'title.task_details'|trans({'%id%': task.id|default('')}) }}</h1>
     {% if task is defined and task|length %}
-        <dl>
-            <dt>Created at</dt>
+        <dl class="dl-horizontal">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ task.id }}</dd>
+            <dt>{{ 'label.created_at'|trans }}</dt>
             <dd>{{ task.createdAt|date('Y/m/d') }}</dd>
-            <dt>Updated at</dt>
+            <dt>{{ 'label.updated_at'|trans }}</dt>
             <dd>{{ task.updatedAt|date('Y/m/d') }}</dd>
-            <dt>Title</dt>
-            <dd>{{ task.title }}</dd>
-            <dt>Comment</dt>
-            <dd>{{ task.comment }}</dd>
+            <dt>{{ 'label.title'|trans }}</dt>
+            <dd>{{  task.title }}</dd>
+            <dt>{{ 'label.comment'|trans }}</dt>
+            <dd>{{  task.comment }}</dd>
         </dl>
+        <p>
+            <a href="{{ url('task_index') }}" title="{{ 'action.back_to_list'|trans }}">
+                {{ 'action.back_to_list'|trans }}
+            </a>
+        </p>
     {% else %}
-        <p>Task not found</p>
+        <p>
+            {{ 'message.record_not_found'|trans }}
+        </p>
     {% endif %}
-    <p>
-        <a href="{{ url('task_index') }}" title="back to list">
-            back to list
-        </a>
-    </p>
 {% endblock %}

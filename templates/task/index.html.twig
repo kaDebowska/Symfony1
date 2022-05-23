@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Task list
+    {{ 'title.task_list'|trans }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -11,16 +11,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Tasks list </h1>
+    <h1>{{ 'title.task_list'|trans }}</h1>
     {% if tasks is defined and tasks|length %}
     <table>
         <tr>
-            <th>Id</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-            <th>Title</th>
-            <th>Comment</th>
-            <th>Actions</th>
+            <th>{{ 'label.id'|trans }}</th>
+            <th>{{ 'label.created_at'|trans }}</th>
+            <th>{{ 'label.updated_at'|trans }}</th>
+            <th>{{ 'label.title'|trans }}</th>
+            <th>{{ 'label.comment'|trans }}</th>
+            <th>{{ 'label.actions'|trans }}</th>
         </tr>
         {% for task in tasks %}
             <tr>
@@ -30,14 +30,14 @@
                 <td>{{ task.title }}</td>
                 <td>{{ task.comment }}</td>
                 <td>
-                    <a href="{{ url('task_show', {'id': task.id}) }}" title="view task">
-                        View task
+                    <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.view'|trans }}">
+                        {{ 'action.view'|trans }}
                     </a>
                 </td>
             </tr>
         {% endfor %}
     </table>
     {% else %}
-    <p>No tasks</p>
+    <p> {{ 'message.empty_list'|trans }}</p>
     {% endif %}
 {% endblock %}
