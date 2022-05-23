@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Task view
+{% endblock %}
+
+{% block body %}
+    <h1>Task view</h1>
+    {% if task is defined and task|length %}
+        <dl>
+            <dt>Created at</dt>
+            <dd>{{ task.createdAt|date('Y/m/d') }}</dd>
+            <dt>Updated at</dt>
+            <dd>{{ task.updatedAt|date('Y/m/d') }}</dd>
+            <dt>Title</dt>
+            <dd>{{ task.title }}</dd>
+            <dt>Comment</dt>
+            <dd>{{ task.comment }}</dd>
+        </dl>
+    {% else %}
+        <p>Task not found</p>
+    {% endif %}
+    <p>
+        <a href="{{ url('task_index') }}" title="back to list">
+            back to list
+        </a>
+    </p>
+{% endblock %}

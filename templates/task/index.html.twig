@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Task list
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/record.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    <h1>Tasks list </h1>
+    {% if tasks is defined and tasks|length %}
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Title</th>
+            <th>Comment</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.createdAt|date('Y/m/d') }}</td>
+                <td>{{ task.updatedAt|date('Y/m/d') }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.comment }}</td>
+                <td>
+                    <a href="{{ url('task_show', {'id': task.id}) }}" title="view task">
+                        View task
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No tasks</p>
+    {% endif %}
+{% endblock %}
