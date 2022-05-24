@@ -4,25 +4,23 @@
     {{ 'title.task_list'|trans }}
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/record.css') }}">
-
-{% endblock %}
-
 {% block body %}
     <h1>{{ 'title.task_list'|trans }}</h1>
-    {% if tasks is defined and tasks|length %}
-    <table>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    <table class="table table-striped">
         <tr>
-            <th>{{ 'label.id'|trans }}</th>
-            <th>{{ 'label.created_at'|trans }}</th>
-            <th>{{ 'label.updated_at'|trans }}</th>
-            <th>{{ 'label.title'|trans }}</th>
-            <th>{{ 'label.comment'|trans }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'task.id') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'task.createdAt') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'task.updatedAt') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'task.title') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'label.comment'|trans, 'task.comment') }}</th>
             <th>{{ 'label.actions'|trans }}</th>
         </tr>
-        {% for task in tasks %}
+        {% for task in pagination.items %}
             <tr>
                 <td>{{ task.id }}</td>
                 <td>{{ task.createdAt|date('Y/m/d') }}</td>
@@ -37,6 +35,10 @@
             </tr>
         {% endfor %}
     </table>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
     {% else %}
     <p> {{ 'message.empty_list'|trans }}</p>
     {% endif %}

@@ -6,6 +6,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Task;
+use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 
 /**
@@ -18,17 +19,21 @@ class TaskFixtures extends AbstractBaseFixtures
      *
      * @param ObjectManager $manager Persistence object manager
      */
-    public function loadData(ObjectManager $manager): void
+    public function loadData(): void
     {
         for ($i = 0; $i < 10; ++$i) {
             $task = new Task();
             $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $task->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            $task->setCreatedAt(
+                DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+            );
+            $task->setUpdatedAt(
+                DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+            );
             $task->setComment($this->faker->paragraph);
-            $manager->persist($task);
+            $this->manager->persist($task);
         }
 
-        $manager->flush();
+        $this->manager->flush();
     }
 }

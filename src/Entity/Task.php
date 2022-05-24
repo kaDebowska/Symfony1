@@ -6,8 +6,7 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
-use DateTime;
-use Faker\Provider\Text;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,22 +31,22 @@ class Task
     /**
      * Created at.
      *
-     * @var DateTime|null
+     * @var DateTimeImmutable|null
      *
      * @psalm-suppress PropertyNotSetInConstructor
      */
-    #[ORM\Column(type: 'datetime')]
-    private ?DateTime $createdAt;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?DateTimeImmutable $createdAt;
 
     /**
      * Updated at.
      *
-     * @var DateTime|null
+     * @var DateTimeImmutable|null
      *
      * @psalm-suppress PropertyNotSetInConstructor
      */
-    #[ORM\Column(type: 'datetime')]
-    private ?DateTime $updatedAt;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?DateTimeImmutable $updatedAt;
 
     /**
      * Title.
@@ -59,6 +58,7 @@ class Task
 
     /**
      * Comment.
+     *
      * @var string|null
      */
     #[ORM\Column(type: 'text')]
@@ -77,9 +77,9 @@ class Task
     /**
      * Getter for created at.
      *
-     * @return DateTime|null Created at
+     * @return DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -87,9 +87,9 @@ class Task
     /**
      * Setter for created at.
      *
-     * @param DateTime|null $createdAt Created at
+     * @param DateTimeImmutable|null $createdAt Created at
      */
-    public function setCreatedAt(?DateTime $createdAt): void
+    public function setCreatedAt(?DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -97,9 +97,9 @@ class Task
     /**
      * Getter for updated at.
      *
-     * @return DateTime|null Updated at
+     * @return DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?DateTime
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -107,9 +107,9 @@ class Task
     /**
      * Setter for updated at.
      *
-     * @param DateTime|null $updatedAt Updated at
+     * @param DateTimeImmutable|null $updatedAt Updated at
      */
-    public function setUpdatedAt(?DateTime$updatedAt): void
+    public function setUpdatedAt(?DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -129,12 +129,11 @@ class Task
      *
      * @param string|null $title Title
      */
-
-
     public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
+
     /**
      * Getter for comment.
      *
@@ -144,6 +143,7 @@ class Task
     {
         return $this->comment;
     }
+
     /**
      * Setter for comment.
      *
@@ -152,6 +152,5 @@ class Task
     public function setComment(?string $comment): void
     {
         $this->comment = $comment;
-
     }
 }

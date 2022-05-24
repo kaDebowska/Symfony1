@@ -22,8 +22,6 @@ abstract class AbstractBaseFixtures extends Fixture
 
     /**
      * Persistence object manager.
-     *
-     * @var ObjectManager
      */
     protected ObjectManager $manager;
 
@@ -42,5 +40,5 @@ abstract class AbstractBaseFixtures extends Fixture
     /**
      * Load data.
      */
-    abstract protected function loadData(ObjectManager $manager): void;
+    abstract protected function loadData(): void;
 }
