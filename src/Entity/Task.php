@@ -57,12 +57,13 @@ class Task
     private ?string $title = null;
 
     /**
-     * Comment.
+     * Category.
      *
-     * @var string|null
+     * @var Category
      */
-    #[ORM\Column(type: 'text')]
-    private ?string $comment = null;
+    #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EXTRA_LAZY')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     /**
      * Getter for Id.
@@ -152,5 +153,17 @@ class Task
     public function setComment(?string $comment): void
     {
         $this->comment = $comment;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

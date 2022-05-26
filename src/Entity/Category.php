@@ -17,8 +17,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\Table(name: 'categories')]
-#[ORM\UniqueConstraint(name: 'uq_categories_title', columns: ['title'])]
-#[UniqueEntity(fields: ['title'])]
+#[ORM\UniqueConstraint(name: 'uq_categories_title', columns: ['title'])] //klucz unikalny
+#[UniqueEntity(fields: ['title'])] //walidator
 class Category
 {
     /**
@@ -55,13 +55,6 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title;
 
-    /**
-     * Slug.
-     *
-     * @var string|null
-     */
-    #[ORM\Column(type: 'string', length: 64)]
-    private ?string $slug;
 
     /**
      * Getter for Id.
