@@ -4,8 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -52,6 +50,17 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
+     * Delete entity.
+     *
+     * @param Category $category Category entity
+     */
+    public function delete(Category $category): void
+    {
+        $this->_em->remove($category);
+        $this->_em->flush();
+    }
+
+    /**
      * Query all records.
      *
      * @return QueryBuilder Query builder
@@ -59,7 +68,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->select('partial category.{id, createdAt, updatedAt, title}')
+            ->select('partial category.{id, createdAt, updatedAt, title, slug}')
             ->orderBy('category.updatedAt', 'DESC');
     }
 

@@ -13,7 +13,6 @@ use Knp\Component\Pager\PaginatorInterface;
  * Class TaskService.
  */
 class TaskService implements TaskServiceInterface
-
 {
     /**
      * Task repository.

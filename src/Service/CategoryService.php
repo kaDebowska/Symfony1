@@ -7,6 +7,9 @@ namespace App\Service;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use App\Repository\TaskRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -14,7 +17,6 @@ use Knp\Component\Pager\PaginatorInterface;
  * Class CategoryService.
  */
 class CategoryService implements CategoryServiceInterface
-
 {
     /**
      * Category repository.
@@ -26,16 +28,19 @@ class CategoryService implements CategoryServiceInterface
      */
     private PaginatorInterface $paginator;
 
+    private TaskRepository $taskRepository;
+
     /**
      * Constructor.
      *
-     * @param CategoryRepository    $categoryRepository Category repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param CategoryRepository $categoryRepository Category repository
+     * @param PaginatorInterface $paginator          Paginator
      */
-    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator)
+    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TaskRepository $taskRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->paginator = $paginator;
+        $this->taskRepository = $taskRepository;
     }
 
     /**
@@ -45,7 +50,7 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if ($category->getId() == null) {
+        if (null == $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());
@@ -67,5 +72,33 @@ class CategoryService implements CategoryServiceInterface
             $page,
             CategoryRepository::PAGINATOR_ITEMS_PER_PAGE
         );
+    }
+
+    /**
+     * Can Category be deleted?
+     *
+     * @param Category $category Category entity
+     *
+     * @return bool Result
+     */
+    public function canBeDeleted(Category $category): bool
+    {
+        try {
+            $result = $this->taskRepository->countByCategory($category);
+
+            return !($result > 0);
+        } catch (NoResultException|NonUniqueResultException) {
+            return false;
+        }
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Category $category Category entity
+     */
+    public function delete(Category $category): void
+    {
+        $this->categoryRepository->delete($category);
     }
 }

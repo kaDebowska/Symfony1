@@ -26,6 +26,9 @@
                         <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.view'|trans }}">
                             {{ 'action.view'|trans }}
                         </a>
+                        <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.delete'|trans }}">
+                            {{ 'action.delete'|trans }}
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
